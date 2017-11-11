@@ -33,9 +33,13 @@ public class Sched2017 {
 		}
 //		doc.addPage(new MonthlyLeftPage(2017,8));
 		doc.addPage(new PDPage());
-		save(new File("‪C:\\Users\\NobIsh\\Desktop","helloworld.pdf"));
+
 		try {
-			doc.close();
+			File file = File.createTempFile("aaa", "bbb");
+			file.delete();
+			file.mkdir();
+			save(new File(file,"helloworld.pdf"));
+			System.out.println(file.getAbsolutePath()+"/"+"helloworld.pdf");			doc.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
