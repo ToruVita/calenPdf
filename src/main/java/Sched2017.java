@@ -32,14 +32,27 @@ public class Sched2017 {
 			LOG.error(e);
 		}
 //		doc.addPage(new MonthlyLeftPage(2017,8));
-		doc.addPage(new PDPage());
+		doc.addPage(new Page(){
+			@Override
+			void drawDays() {
+				Rectangle r = new Rectangle(100,100,100,100);
+				try {
+					drawString(r, "Fafa", 0, enFontTitle);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		});
 
 		try {
 			File file = File.createTempFile("aaa", "bbb");
 			file.delete();
 			file.mkdir();
 			save(new File(file,"helloworld.pdf"));
-			System.out.println(file.getAbsolutePath()+"/"+"helloworld.pdf");			doc.close();
+			doc.close();
+			System.out.println(file.getAbsolutePath()+"/"+"helloworld.pdf");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -115,6 +128,13 @@ public class Sched2017 {
 			}
 			contentStream.showText(str);
 			contentStream.endText();
+			contentStream.moveTo(r.x, r.y);
+			contentStream.lineTo(r.x+r.width, r.y);
+			contentStream.lineTo(r.x+r.width, r.y+r.height);
+			contentStream.lineTo(r.x, r.y+r.height);
+			contentStream.lineTo(r.x, r.y);
+	        // 線を描画
+	        contentStream.stroke();
 		}
 	}
 }
