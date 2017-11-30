@@ -16,6 +16,7 @@ public class ShowCase extends JScrollPane{
 	public void setImage(BufferedImage image){
 		this.image = image;
 		disp.setPreferredSize(new Dimension(image.getWidth(), image.getHeight()));
+		repaint();
 	}
 	JPanel disp = new JPanel(){
 		public void paint(Graphics g){

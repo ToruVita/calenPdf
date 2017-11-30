@@ -14,17 +14,7 @@ public class MainPanel extends JPanel{
 	private ArrayList <BufferedImage> images = new ArrayList <BufferedImage>();
 	private int index = -1;
 	private int gridSize = 100;
-	JPanel thumbPanel = new JPanel(){
-		public void paint(Graphics g){
-			int x = 0;
-			for(BufferedImage im : images){
-				g.drawImage(im, x, 0, gridSize, gridSize,this);
-				x+=gridSize;
-			}
-			g.drawRect(gridSize*index, 0, gridSize, gridSize);
-		}
-	};
-	
+	ThumbnailPanel thumbPanel;
 	ShowCase showCase;
 	MainPanel(){
 		this(128);
@@ -33,16 +23,10 @@ public class MainPanel extends JPanel{
 		super();
 		this.gridSize = gridSize;
 		setLayout(new BorderLayout());
-		thumbPanel.setPreferredSize(new Dimension(120,gridSize));
-		thumbPanel.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e) {
-				index = e.getX() / gridSize;
-				showCase.setImage(images.get(index));
-				repaint();
-			}
-		});
-		add(new JScrollPane(thumbPanel), BorderLayout.SOUTH);
 		add(showCase = new ShowCase(), BorderLayout.CENTER);
+		thumbPanel = new ThumbnailPanel(showCase, 128);
+		thumbPanel.setImages(images);
+		add(new JScrollPane(thumbPanel), BorderLayout.SOUTH);
 	}
 	public void addImage(BufferedImage image){
 		images.add(image);
