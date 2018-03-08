@@ -52,15 +52,18 @@ public class ThumbnailPanel extends JPanel implements MouseListener{
 		repaint();
 	}
 	public void mouseReleased(MouseEvent e) {
+		int refIndex = e.getX() / gridSize;
 		targetIndex = (e.getX()+gridSize/2) / gridSize;
-		reOrder(targetIndex, index);
+		if(index!=refIndex){
+			reOrder(targetIndex, index);
+		}
 		repaint();
 	}
 	void reOrder(int t, int s){
 		if(t!=s){
-			BufferedImage im = images.get(s);
-			images.remove(s);
-			images.add(t, images.get(s));
+//			BufferedImage im = images.get(s);
+//			images.remove(s);
+//			images.add(t, images.get(s));
 		}
 	}
 	public void mouseEntered(MouseEvent e) {

@@ -3,7 +3,6 @@ import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.Month;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -26,7 +25,7 @@ public class Main {
 		PDPage page = document.getPage(month*2-1);
 		PDPageContentStream contentStream = new PDPageContentStream(document, page);
 		Rectangle r = new Rectangle(20, 680, 100, 100);
-		monthTitle(contentStream, r, 2017, month);
+		monthTitle(contentStream, r, year, month);
 		contentStream.close();
 	}
 	class PartsOfPDF{
@@ -66,13 +65,14 @@ public class Main {
 //		contentStream.stroke();
 	}
 	void makeDay(LocalDateTime day) throws IOException{
+		int year = day.getYear();
 		int month = day.getMonth().getValue();
 		int d = day.getDayOfMonth();
 		int dIndex = (d<=16)? d : d-16;
 		PDPage page = document.getPage(month*2-((d<17)?1:0));
 		PDPageContentStream contentStream = new PDPageContentStream(document, page,true,true,true);
 		Rectangle r = new Rectangle(20, 680-41*dIndex, 580, 41);
-		makeDay(contentStream, r, 2017, month, d);
+		makeDay(contentStream, r, year, month, d);
 		contentStream.close();
 	}
 	void makeDay(PDPageContentStream contentStream, Rectangle r, int year, int month, int day) throws IOException{
@@ -118,10 +118,10 @@ public class Main {
 	}
 	void drawPage() throws IOException{
 		for(int m = 1; m <= 12; m++){
-			monthTitle(2017, m);
+			monthTitle(2018, m);
 		}
-		LocalDateTime dy = LocalDateTime.of(2017, 1, 1, 12, 0, 0);
-		while(dy.getYear()==2017){
+		LocalDateTime dy = LocalDateTime.of(2018, 1, 1, 12, 0, 0);
+		while(dy.getYear()==2018){
 			makeDay(dy);
 			dy=dy.plusDays(1);
 		}
