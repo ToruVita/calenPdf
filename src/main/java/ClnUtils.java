@@ -15,7 +15,7 @@ public class ClnUtils {
 	static String yearNameJ(int year){
 		return "平成"+(year+29-2017)+"年";
 	}
-	private static String[] monthName = { "January", "February", "March", "April",
+	static String[] monthName = { "January", "February", "March", "April",
 			"May", "June", "July", "August", "September", "October",
 			"November", "December" };
 	static String[] monthNameJ = { "睦月", "如月", "弥生", "卯月", "皐月", "水無月", "文月",
